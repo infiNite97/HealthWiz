@@ -75,11 +75,11 @@ struct WelcomePage {
       }
       .padding({ bottom: 30 })
 
-      Text('健康轻行App致力于在饮食控制方面为您提供健康管理')
+      Text('健康小智App致力于全方位为您提供健康管理')
         .opacityWhiteText(0.8)
       Row() {
 
-        Text('健康轻行支持').opacityWhiteText(0.8, 12)
+        Text('健康小智支持').opacityWhiteText(0.8, 12)
         Text('IPv6')
           .opacityWhiteText(0.8, 12)
           .border({ width: 1, color: Color.White, radius: 16 })
