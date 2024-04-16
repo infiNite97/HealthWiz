@@ -13,7 +13,7 @@ struct Index {
         .width(22)
         .fillColor(this.currentIndex === index ? $r('app.color.primary_color') : $r('app.color.gray'))
       Text(title)
-        .fontSize(14)
+        .fontSize(16)
         .fontColor(this.currentIndex === index ? $r('app.color.primary_color') : $r('app.color.gray'))
     }
   }
