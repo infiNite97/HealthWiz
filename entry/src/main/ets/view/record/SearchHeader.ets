@@ -1,0 +1,20 @@
+@Component
+export default struct SearchHeader {
+  build() {
+    Row({ space: 8 }) {
+      Search({ placeholder: '搜索饮食或运动信息' })
+        .textFont({ size: 18 })
+        .layoutWeight(1)
+      Badge({
+        count: 1,
+        position: BadgePosition.RightTop,
+        style: { fontSize: 10 }
+      }) {
+        Image($r('app.media.ic_public_email'))
+          .width(24)
+      }
+    }
+    .margin({top:60})
+    .width('95%')
+  }
+}

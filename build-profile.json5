@@ -1,0 +1,49 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_FreshEats_com.example.fresheats_30086000744490014.cer",
+          "storePassword": "0000001B435F863816B5B3649F7BBBA49EDA8A8A995D7A7F4D8882E9812D37B058BB3F5E3B35C11C02A4BB",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B78AEAD854B9FEE4C1858F340C1D898991E173E0EDB91D19AF6F9D8A8E9273E62A71B4AE1C9758B",
+          "profile": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_FreshEats_com.example.fresheats_30086000744490014.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_FreshEats_com.example.fresheats_30086000744490014.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 9,
+    "compatibleSdkVersion": 9,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
