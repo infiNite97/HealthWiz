@@ -10,12 +10,12 @@ export default struct ItemList {
       TabContent() {
         this.TabContentBuilder()
       }
-      .tabBar('全部')
+      .tabBar('主食')
 
       TabContent() {
         this.TabContentBuilder()
       }
-      .tabBar('全部')
+      .tabBar('果蔬')
     }
     .width('94%')
     .height('100%')
