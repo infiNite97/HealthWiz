@@ -8,6 +8,10 @@ export default struct RecordIndex {
 
       // 头部搜索栏
       SearchHeader()
+
+
+
+
     }
     .width('100%')
     .height('100%')

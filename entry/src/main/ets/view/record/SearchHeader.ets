@@ -14,7 +14,6 @@ export default struct SearchHeader {
           .width(24)
       }
     }
-    .margin({top:60})
     .width('95%')
   }
 }
