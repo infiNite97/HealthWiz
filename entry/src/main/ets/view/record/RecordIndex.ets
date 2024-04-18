@@ -1,10 +1,11 @@
+import RecordList from './RecordList'
 import SearchHeader from './SearchHeader'
 import StatsCard from './StatsCard'
 
 @Component
 export default struct RecordIndex {
   build() {
-    Column(){
+    Column() {
 
 
       // 头部搜索栏
@@ -12,7 +13,8 @@ export default struct RecordIndex {
 
       StatsCard()
 
-
+      RecordList()
+        .layoutWeight(1)
     }
     .width('100%')
     .height('100%')
