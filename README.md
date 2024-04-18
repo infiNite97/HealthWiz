@@ -1,2 +1,2 @@
 # FreshEats
- 基于harmonyos的健康类app开发，api9版本
+ 基于api9版本下HarmonyOS的健康类app开发
