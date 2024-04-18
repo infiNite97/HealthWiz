@@ -1,5 +1,7 @@
 import DateUtil from '../../common/utils/DateUtil'
+import CalorieStats from './CalorieStats'
 import DatePickDialog from './DatePickDialog'
+import NutrientStats from './NutrientStats'
 
 @Component
 export default struct StatsCard {
@@ -11,6 +13,7 @@ export default struct StatsCard {
   })
 
   build() {
+    // 日期信息
     Column() {
       Row() {
         Text(DateUtil.formatDate(this.selectedDate))
@@ -19,9 +22,18 @@ export default struct StatsCard {
           .width(20)
           .fillColor($r('app.color.secondary_color'))
       }
+      .width('100%')
       .padding(10)
       .onClick(()=>{this.controller.open()})
-
+      // 统计信息
+      Swiper(){
+        CalorieStats()
+        NutrientStats()
+      }
+      .width('100%')
+      .backgroundColor(Color.White)
+      .borderRadius(18)
+      .indicatorStyle({selectedColor:$r('app.color.primary_color')})
     }
     .width('94%')
     .backgroundColor($r('app.color.stats_title_bgc'))
