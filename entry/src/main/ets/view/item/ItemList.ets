@@ -1,5 +1,7 @@
 @Component
 export default struct ItemList {
+  showPanel: () => void
+
   build() {
     Tabs() {
       TabContent() {
@@ -41,6 +43,7 @@ export default struct ItemList {
           .width('100%')
           .padding(6)
         }
+        .onClick(this.showPanel)
       })
     }
     .width('100%')
