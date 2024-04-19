@@ -10,7 +10,7 @@ export default struct ItemCard {
       // 名称
       Row() {
         Text('全麦吐司')
-          .fontWeight(700)
+          .fontWeight(600)
       }
       .backgroundColor($r('app.color.lightest_primary_color'))
       .padding({ top: 5, bottom: 5, left: 12, right: 12 })
