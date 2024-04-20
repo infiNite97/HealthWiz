@@ -1,6 +1,5 @@
 import router from '@ohos.router'
 import ItemList from '../view/item/ItemList'
-import thermal from '@ohos.thermal'
 import ItemPanelHeader from '../view/item/ItemPanelHeader'
 import ItemCard from '../view/item/ItemCard'
 import NumberKeyboard from '../view/item/NumberKeyboard'

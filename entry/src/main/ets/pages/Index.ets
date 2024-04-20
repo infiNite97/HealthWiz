@@ -1,3 +1,5 @@
+import BreakpointConstants from '../common/constants/BreakpointConstants'
+import BreakpointSystem from '../common/utils/BreakpointSystem'
 import WenxinAI from '../view/ai/WenxinAI'
 import RecordIndex from '../view/record/RecordIndex'
 
@@ -5,6 +7,8 @@ import RecordIndex from '../view/record/RecordIndex'
 @Component
 struct Index {
   @State currentIndex: number = 0
+  private breakpointSystem: BreakpointSystem = new BreakpointSystem()
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointConstants.BREAKPOINT_SM
 
   @Builder
   TabBarBuilder(title: ResourceStr, image: ResourceStr, index: number) {
@@ -18,8 +22,25 @@ struct Index {
     }
   }
 
+  aboutToAppear() {
+    this.breakpointSystem.register()
+  }
+
+  aboutToDisappear() {
+    this.breakpointSystem.unregister()
+  }
+
+  chooseBarPosition() {
+    let barposition = {
+      sm: BarPosition.End,
+      md: BarPosition.Start,
+      lg: BarPosition.Start
+    }
+    return barposition[this.currentBreakpoint]
+  }
+
   build() {
-    Tabs({ barPosition: BarPosition.End }) {
+    Tabs({ barPosition: this.chooseBarPosition() }) {
 
       TabContent() {
         RecordIndex()
@@ -40,5 +61,6 @@ struct Index {
     .width('100%')
     .height('100%')
     .onChange(index => this.currentIndex = index)
+    .vertical(this.currentBreakpoint == 'sm' ? false : true)
   }
 }
