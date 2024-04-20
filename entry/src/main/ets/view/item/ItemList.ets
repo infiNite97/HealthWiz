@@ -1,39 +1,44 @@
+import ItemModel from '../../model/ItemModel'
+import GroupInfo from '../../viewmodel/GroupInfo'
+import RecordItem from '../../viewmodel/RecordItem'
+
 @Component
 export default struct ItemList {
-  showPanel: () => void
+  showPanel: (item: RecordItem) => void
+  @State isFood: boolean = true
 
   build() {
     Tabs() {
       TabContent() {
-        this.TabContentBuilder()
+        this.TabContentBuilder(ItemModel.list(this.isFood))
       }
       .tabBar('全部')
 
-      TabContent() {
-        this.TabContentBuilder()
-      }
-      .tabBar('主食')
+      ForEach(ItemModel.listItemGroupByCategory(this.isFood), (group: GroupInfo) => {
+        TabContent() {
+          this.TabContentBuilder(group.items)
+        }
+        .tabBar(group.type.name)
+      })
 
-      TabContent() {
-        this.TabContentBuilder()
-      }
-      .tabBar('果蔬')
     }
     .width('94%')
     .height('100%')
+    .barMode(BarMode.Scrollable)
   }
 
   @Builder
-  TabContentBuilder() {
+  TabContentBuilder(items: RecordItem[]) {
     List({ space: 10 }) {
-      ForEach([1, 2, 3, 4, 5, 6], () => {
+      ForEach(items, (item: RecordItem) => {
         ListItem() {
           Row({ space: 6 }) {
-            Image($r('app.media.toast')).width(50)
+            Image(item.image).width(50)
             Column({ space: 4 }) {
-              Text('全麦吐司').fontWeight(500)
-              Text('1片').fontSize(14).fontColor($r('app.color.light_gray'))
+              Text(item.name).fontWeight(500)
+              Text(`${item.calorie}千卡/${item.unit}`).fontSize(14).fontColor($r('app.color.light_gray'))
             }
+            .alignItems(HorizontalAlign.Start)
 
             Blank()
             Image($r('app.media.ic_public_add_norm_filled'))
@@ -43,7 +48,7 @@ export default struct ItemList {
           .width('100%')
           .padding(6)
         }
-        .onClick(this.showPanel)
+        .onClick(() => this.showPanel(item))
       })
     }
     .width('100%')

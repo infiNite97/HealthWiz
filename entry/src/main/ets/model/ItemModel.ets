@@ -51,23 +51,21 @@ const workouts: RecordItem[] = [
 ]
 
 class ItemModel {
-  getById(id: number, isFood: boolean = true) {
-    return isFood ? foods[id] : workouts[id - 10000]
-  }
-
   list(isFood: boolean = true): RecordItem[] {
     return isFood ? foods : workouts
   }
 
   listItemGroupByCategory(isFood: boolean = true) {
-    // 1.判断要处理的是食物还是运动
+    // 读取前判断为食物还是运动
     let categories = isFood ? FoodCategories : WorkoutCategories
     let items = isFood ? foods : workouts
-    // 2.创建空的分组
+    // 创建空分组
     let groups = categories.map(itemCategory => new GroupInfo(itemCategory, []))
-    // 3.遍历记录项列表，将食物添加到对应的分组
-    items.forEach(item => groups[item.categoryId].items.push(item))
-    // 4.返回结果
+    // 将对应item添加到分组
+    items.forEach(item => {
+      groups[item.categoryId].items.push(item)
+    })
+    // 返回数据
     return groups
   }
 }
