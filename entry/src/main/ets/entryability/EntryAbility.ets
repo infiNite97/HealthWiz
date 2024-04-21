@@ -4,7 +4,7 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import Want from '@ohos.app.ability.Want';
 import window from '@ohos.window';
 import PreferenceUtil from '../common/utils/PreferenceUtil';
-import DialogModel from '../view/ai/DialogModel';
+import DialogModel from '../model/DialogModel';
 
 export default class EntryAbility extends UIAbility {
   async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {

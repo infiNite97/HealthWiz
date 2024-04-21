@@ -30,24 +30,20 @@ const foods: RecordItem[] = [
 ]
 
 const workouts: RecordItem[] = [
-  new RecordItem(10000, '散步', $r('app.media.ic_walk'), WorkoutCategoryEnum.WALKING, '小时', 111),
-  new RecordItem(10001, '快走', $r('app.media.ic_walk'), WorkoutCategoryEnum.WALKING, '小时', 343),
-  new RecordItem(10002, '慢跑', $r('app.media.ic_running'), WorkoutCategoryEnum.RUNNING, '小时', 472),
-  new RecordItem(10003, '快跑', $r('app.media.ic_running'), WorkoutCategoryEnum.RUNNING, '小时', 652),
-  new RecordItem(10004, '自行车', $r('app.media.ic_ridding'), WorkoutCategoryEnum.RIDING, '小时', 497),
-  new RecordItem(10005, '动感单车', $r('app.media.ic_ridding'), WorkoutCategoryEnum.RIDING, '小时', 587),
-  new RecordItem(10006, '瑜伽', $r('app.media.ic_aerobics'), WorkoutCategoryEnum.AEROBICS, '小时', 172),
-  new RecordItem(10007, '健身操', $r('app.media.ic_aerobics'), WorkoutCategoryEnum.AEROBICS, '小时', 429),
-  new RecordItem(10008, '游泳', $r('app.media.ic_swimming'), WorkoutCategoryEnum.SWIMMING, '小时', 472),
-  new RecordItem(10009, '冲浪', $r('app.media.ic_swimming'), WorkoutCategoryEnum.SWIMMING, '小时', 429),
-  new RecordItem(10010, '篮球', $r('app.media.ic_basketball'), WorkoutCategoryEnum.BALLGAME, '小时', 472),
-  new RecordItem(10011, '足球', $r('app.media.ic_football'), WorkoutCategoryEnum.BALLGAME, '小时', 515),
-  new RecordItem(10012, '排球', $r("app.media.ic_volleyball"), WorkoutCategoryEnum.BALLGAME, '小时', 403),
-  new RecordItem(10013, '羽毛球', $r("app.media.ic_badminton"), WorkoutCategoryEnum.BALLGAME, '小时', 386),
-  new RecordItem(10014, '乒乓球', $r("app.media.ic_table_tennis"), WorkoutCategoryEnum.BALLGAME, '小时', 257),
-  new RecordItem(10015, '哑铃飞鸟', $r("app.media.ic_dumbbell"), WorkoutCategoryEnum.STRENGTH, '小时', 343),
-  new RecordItem(10016, '哑铃卧推', $r("app.media.ic_dumbbell"), WorkoutCategoryEnum.STRENGTH, '小时', 429),
-  new RecordItem(10017, '仰卧起坐', $r("app.media.ic_sit_up"), WorkoutCategoryEnum.STRENGTH, '小时', 515),
+  new RecordItem(10000, '跑', $r('app.media.pao'), WorkoutCategoryEnum.LOWLIMBS, '小时', 221),
+  new RecordItem(10001, '快跑', $r('app.media.bengpao'), WorkoutCategoryEnum.LOWLIMBS, '小时', 343),
+  new RecordItem(10002, '棒球', $r('app.media.bangqiu'), WorkoutCategoryEnum.ARMS, '小时', 472),
+  new RecordItem(10003, '单杠', $r('app.media.danggang'), WorkoutCategoryEnum.ARMS, '小时', 652),
+  new RecordItem(10004, '乒乓球', $r('app.media.pingpang'), WorkoutCategoryEnum.WHOLE, '小时', 257),
+  new RecordItem(10005, '溜冰', $r('app.media.liubing'), WorkoutCategoryEnum.LOWLIMBS, '小时', 587),
+  new RecordItem(10006, '瑜伽', $r('app.media.ic_aerobics'), WorkoutCategoryEnum.WHOLE, '小时', 172),
+  new RecordItem(10008, '游泳', $r('app.media.youyong'), WorkoutCategoryEnum.WHOLE, '小时', 682),
+  new RecordItem(10010, '跳舞', $r('app.media.tiaowu'), WorkoutCategoryEnum.WHOLE, '小时', 472),
+  new RecordItem(10011, '足球', $r('app.media.zuqiu'), WorkoutCategoryEnum.LOWLIMBS, '小时', 515),
+  new RecordItem(10012, '射箭', $r("app.media.shejian"), WorkoutCategoryEnum.ARMS, '小时', 403),
+  new RecordItem(10013, '呼啦圈', $r("app.media.hulaquan"), WorkoutCategoryEnum.BODY, '小时', 386),
+  new RecordItem(10016, '哑铃', $r("app.media.juzhong"), WorkoutCategoryEnum.ARMS, '小时', 329),
+  new RecordItem(10017, '仰卧起坐', $r("app.media.yangwoqizuo"), WorkoutCategoryEnum.BODY, '小时', 515),
 ]
 
 class ItemModel {

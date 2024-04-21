@@ -3,7 +3,7 @@ import relationalStore from '@ohos.data.relationalStore';
 import { ColumnInfo, ColumnType } from '../bean/ColumnInfo';
 import Logger from './Logger';
 
-const DB_FILENAME: string = 'HeiMaHealthy.db'
+const DB_FILENAME: string = 'HealthWiz.db'
 
 class DbUtil {
   rdbStore: relationalStore.RdbStore

@@ -89,32 +89,20 @@
       "value": "other"
     },
     {
-      "name": "walking_type",
-      "value": "walking"
+      "name": "lowlimbs",
+      "value": "lowlimbs"
     },
     {
-      "name": "running",
-      "value": "running"
+      "name": "arms",
+      "value": "arms"
     },
     {
-      "name": "riding",
-      "value": "riding"
+      "name": "body",
+      "value": "body"
     },
     {
-      "name": "aerobics",
-      "value": "aerobics"
-    },
-    {
-      "name": "swimming",
-      "value": "swimming"
-    },
-    {
-      "name": "ballgame",
-      "value": "ballgame"
-    },
-    {
-      "name": "strength",
-      "value": "strength"
+      "name": "whole",
+      "value": "whole"
     }
   ]
 }

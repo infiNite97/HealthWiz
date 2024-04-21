@@ -6,6 +6,9 @@ import NutrientStats from './NutrientStats'
 
 @Component
 export default struct StatsCard {
+  @State intake: number = 192
+  @State expend: number = 150
+  @Prop recommend: number
   @StorageProp('selectedDate') selectedDate: number = DateUtil.beginTimeOfDay(new Date())
   @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointConstants.BREAKPOINT_SM
   controller: CustomDialogController = new CustomDialogController({
@@ -22,7 +25,6 @@ export default struct StatsCard {
           .width(20)
           .fillColor($r('app.color.secondary_color'))
       }
-      .width('100%')
       .padding(10)
       .onClick(() => {
         this.controller.open()
@@ -31,7 +33,7 @@ export default struct StatsCard {
       // 统计信息
       Swiper() {
         // 热量信息
-        CalorieStats()
+        CalorieStats({ intake: this.intake, expend: this.expend, recommend: this.recommend })
         // 营养素信息
         NutrientStats()
       }

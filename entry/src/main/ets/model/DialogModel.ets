@@ -1,5 +1,5 @@
 import relationalStore from '@ohos.data.relationalStore'
-import { MsgInput } from './WenxinAI'
+import { MsgInput } from '../view/ai/WenxinAI'
 
 // 对话存储数据库
 class DialogModel {

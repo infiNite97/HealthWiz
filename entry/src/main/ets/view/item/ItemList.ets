@@ -5,7 +5,7 @@ import RecordItem from '../../viewmodel/RecordItem'
 @Component
 export default struct ItemList {
   showPanel: (item: RecordItem) => void
-  @State isFood: boolean = true
+  @State isFood: boolean = false
 
   build() {
     Tabs() {

@@ -42,46 +42,31 @@ let FoodCategories = [
  */
 enum WorkoutCategoryEnum {
   /**
-   * 走路
+   * 下肢
    */
-  WALKING,
+  LOWLIMBS,
   /**
-   * 跑步
+   * 手臂
    */
-  RUNNING,
+  ARMS,
   /**
-   * 骑行
+   * 躯干
    */
-  RIDING,
+  BODY,
   /**
-   * 跳操
+   * 全身
    */
-  AEROBICS,
-  /**
-   * 游泳
-   */
-  SWIMMING,
-  /**
-   * 打球
-   */
-  BALLGAME,
-  /**
-   * 力量训练
-   */
-  STRENGTH
+  WHOLE
 }
 
 /**
  * 运动类型数组
  */
 let WorkoutCategories = [
-  new ItemCategory(0, $r('app.string.walking_type')),
-  new ItemCategory(1, $r('app.string.running')),
-  new ItemCategory(2, $r('app.string.riding')),
-  new ItemCategory(3, $r('app.string.aerobics')),
-  new ItemCategory(4, $r('app.string.swimming')),
-  new ItemCategory(5, $r('app.string.ballgame')),
-  new ItemCategory(6, $r('app.string.strength')),
+  new ItemCategory(0, $r('app.string.lowlimbs')),
+  new ItemCategory(1, $r('app.string.arms')),
+  new ItemCategory(2, $r('app.string.body')),
+  new ItemCategory(3, $r('app.string.whole'))
 ]
 
 export { FoodCategories, WorkoutCategories, FoodCategoryEnum, WorkoutCategoryEnum }

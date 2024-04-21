@@ -1,5 +1,17 @@
 import RecordItem from '../../viewmodel/RecordItem'
 
+@Builder
+function NutrientInfo(label: string, value: number) {
+  Column({ space: 8 }) {
+    Text(label)
+      .fontSize(14)
+      .fontColor($r('app.color.light_gray'))
+    Text((value * this.amount).toFixed(1))
+      .fontSize(18)
+      .fontWeight(700)
+  }
+}
+
 @Component
 export default struct ItemCard {
   @Prop amount: number
@@ -24,11 +36,42 @@ export default struct ItemCard {
         .opacity(0.6)
       // 营养素
       Row({ space: 8 }) {
-        this.NutrientInfo('热量(千卡)', this.item.calorie)
+        Column({ space: 8 }) {
+          Text('热量(千卡)')
+            .fontSize(14)
+            .fontColor($r('app.color.light_gray'))
+          Text((this.item.calorie * this.amount).toFixed(1))
+            .fontSize(18)
+            .fontWeight(700)
+        }
+
         if (this.item.id < 10000) {
-          this.NutrientInfo('碳水(克)', this.item.carbon)
-          this.NutrientInfo('蛋白质(克)', this.item.protein)
-          this.NutrientInfo('脂肪(克)', this.item.fat)
+          Column({ space: 8 }) {
+            Text('碳水(克)')
+              .fontSize(14)
+              .fontColor($r('app.color.light_gray'))
+            Text((this.item.carbon * this.amount).toFixed(1))
+              .fontSize(18)
+              .fontWeight(700)
+          }
+
+          Column({ space: 8 }) {
+            Text('蛋白质(克)')
+              .fontSize(14)
+              .fontColor($r('app.color.light_gray'))
+            Text((this.item.protein * this.amount).toFixed(1))
+              .fontSize(18)
+              .fontWeight(700)
+          }
+
+          Column({ space: 8 }) {
+            Text('脂肪(克)')
+              .fontSize(14)
+              .fontColor($r('app.color.light_gray'))
+            Text((this.item.fat * this.amount).toFixed(1))
+              .fontSize(18)
+              .fontWeight(700)
+          }
         }
 
       }
@@ -56,17 +99,5 @@ export default struct ItemCard {
       }
     }
 
-  }
-
-  @Builder
-  NutrientInfo(label: string, value: number) {
-    Column({ space: 8 }) {
-      Text(label)
-        .fontSize(14)
-        .fontColor($r('app.color.light_gray'))
-      Text((value * this.amount).toFixed(1))
-        .fontSize(18)
-        .fontWeight(700)
-    }
   }
 }

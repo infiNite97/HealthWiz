@@ -1,6 +1,6 @@
 import http from '@ohos.net.http'
 import { WindowMode } from '@ohos.UiTest'
-import DialogModel from './DialogModel'
+import DialogModel from '../../model/DialogModel'
 
 // 文心一言返回体
 class WenXinReturn {

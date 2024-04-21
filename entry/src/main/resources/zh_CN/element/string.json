@@ -89,32 +89,20 @@
       "value": "其它"
     },
     {
-      "name": "walking_type",
-      "value": "走路"
+      "name": "lowlimbs",
+      "value": "下肢"
     },
     {
-      "name": "running",
-      "value": "跑步"
+      "name": "arms",
+      "value": "手臂"
     },
     {
-      "name": "riding",
-      "value": "骑行"
+      "name": "body",
+      "value": "躯干"
     },
     {
-      "name": "aerobics",
-      "value": "跳操"
-    },
-    {
-      "name": "swimming",
-      "value": "游泳"
-    },
-    {
-      "name": "ballgame",
-      "value": "打球"
-    },
-    {
-      "name": "strength",
-      "value": "力量训练"
+      "name": "whole",
+      "value": "全身"
     }
   ]
 }

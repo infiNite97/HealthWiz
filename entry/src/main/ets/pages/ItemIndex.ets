@@ -8,10 +8,10 @@ import RecordItem from '../viewmodel/RecordItem'
 @Entry
 @Component
 struct ItemIndex {
-  @State showPanel: boolean = false
   @State amount: number = 1
   @State value: string = ''
   @State item: RecordItem = null
+  @State showPanel: boolean = false
 
   onPanelShow(item: RecordItem) {
     this.amount = 1
