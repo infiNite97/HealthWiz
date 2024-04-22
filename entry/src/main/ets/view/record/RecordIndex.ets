@@ -1,4 +1,5 @@
 import DateUtil from '../../common/utils/DateUtil'
+import PreferenceUtil from '../../common/utils/PreferenceUtil'
 import RecordService from '../../service/RecordService'
 import RecordVO from '../../viewmodel/RecordVO'
 import RecordList from './RecordList'
@@ -23,13 +24,17 @@ export default struct RecordIndex {
   @Provide records: RecordVO[] = []
   @Prop @Watch('handlePageShow') isPageShow: boolean
 
-  handlePageShow() {
+  async handlePageShow() {
     if (this.isPageShow) {
       this.aboutToAppear()
     }
   }
 
   async aboutToAppear() {
+    this.recommendcarbon = await PreferenceUtil.getPreferenceValue('recommendcarbon', this.recommendcarbon) as number
+    this.recommendprotein = await PreferenceUtil.getPreferenceValue('recommendprotein', this.recommendprotein) as number
+    this.recommendfat = await PreferenceUtil.getPreferenceValue('recommendfat', this.recommendfat) as number
+    this.recommend = await PreferenceUtil.getPreferenceValue('recommend', this.recommend) as number
     this.records = await RecordService.queryRecordByDate(this.selectedDate)
   }
 
@@ -212,6 +217,10 @@ export default struct RecordIndex {
               this.recommendcarbon = this.rcb
               this.recommendprotein = this.rpr
               this.recommendfat = this.rft
+              PreferenceUtil.putPreferenceValue('recommend', this.recommend)
+              PreferenceUtil.putPreferenceValue('recommendcarbon', this.recommendcarbon)
+              PreferenceUtil.putPreferenceValue('recommendprotein', this.recommendprotein)
+              PreferenceUtil.putPreferenceValue('recommendfat', this.recommendfat)
             })
         }
         .width('100%')

@@ -12,7 +12,7 @@ import RecordModel from '../model/RecordModel';
 
 export default class EntryAbility extends UIAbility {
   async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
-    PreferenceUtil.loadPreference(this.context)
+    await PreferenceUtil.loadPreference(this.context)
 
     AppStorage.SetOrCreate(CommonConstants.RECORD_DATE, DateUtil.beginTimeOfDay(new Date()))
 
