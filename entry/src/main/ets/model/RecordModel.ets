@@ -38,18 +38,18 @@ class RecordModel {
   }
 
   deleteById(id: number): Promise<number> {
-    // 1.删除条件
+    // 删除条件
     let predicates = new relationalStore.RdbPredicates(TABLE_NAME)
     predicates.equalTo(ID_COLUMN, id)
-    // 2.删除
+    // 删除
     return DbUtil.delete(predicates)
   }
 
   listByDate(date: number): Promise<RecordPO[]> {
-    // 1.查询条件
+    // 查询条件
     let predicates = new relationalStore.RdbPredicates(TABLE_NAME)
     predicates.equalTo(DATE_COLUMN, date)
-    // 2.查询
+    // 查询
     return DbUtil.queryForList(predicates, COLUMNS)
   }
 }

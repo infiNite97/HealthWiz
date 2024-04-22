@@ -91,11 +91,11 @@ export class CommonConstants {
   static readonly SPACE_12: number = 12
 
   // global data key
-  static readonly H_STORE: string = 'FreshEatsStore'
+  static readonly H_STORE: string = 'HealthWizStore'
 
   static readonly RECORD_DATE: string = 'selectedDate'
 
-  static readonly PACKAGE_NAME: string = 'com.example.fresheats'
+  static readonly PACKAGE_NAME: string = 'com.example.HealthWiz'
 
   static readonly ENTRY_ABILITY: string = 'EntryAbility'
 

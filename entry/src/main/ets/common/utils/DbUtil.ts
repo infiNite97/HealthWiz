@@ -43,9 +43,9 @@ class DbUtil {
 
   insert(tableName: string, obj: any, columns: ColumnInfo[]): Promise<number> {
     return new Promise((resolve, reject) => {
-      // 1.构建新增数据
+      // 构建新增数据
       let value = this.buildValueBucket(obj, columns)
-      // 2.新增
+      // 新增
       this.rdbStore.insert(tableName, value, (err, id) => {
         if (err) {
           Logger.error('新增失败！', JSON.stringify(err))
@@ -87,17 +87,17 @@ class DbUtil {
   }
 
   parseResultSet<T>(result: relationalStore.ResultSet, columns: ColumnInfo[]): T[] {
-    // 1.声明最终返回的结果
+    // 声明最终返回的结果
     let arr = []
-    // 2.判断是否有结果
+    // 判断是否有结果
     if (result.rowCount <= 0) {
       return arr
     }
-    // 3.处理结果
+    // 处理结果
     while (!result.isAtLastRow) {
-      // 3.1.去下一行
+      // 去下一行
       result.goToNextRow()
-      // 3.2.解析这行数据，转为对象
+      // 解析这行数据，转为对象
       let obj = {}
       columns.forEach(info => {
         let val = null
@@ -117,7 +117,7 @@ class DbUtil {
         }
         obj[info.name] = val
       })
-      // 3.3.将对象填入结果数组
+      // 将对象填入结果数组
       arr.push(obj)
       Logger.debug('查询到数据：', JSON.stringify(obj))
     }

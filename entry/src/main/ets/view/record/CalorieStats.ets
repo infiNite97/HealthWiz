@@ -1,14 +1,14 @@
 @Component
 export default struct CalorieStats {
-  intake: number
-  expend: number
+  @Prop intake: number
+  @Prop expend: number
   @Prop recommend: number
 
   build() {
     Row({ space: 6 }) {
 
 
-      this.statsBuilder('饮食摄入', this.intake)
+      this.statsBuilder({ label: '饮食摄入', value: this.intake })
 
       Stack() {
         Progress({
@@ -19,26 +19,14 @@ export default struct CalorieStats {
           .width(130)
           .style({ strokeWidth: 8 })
           .color($r('app.color.primary_color'))
-        Column({ space: 6 }) {
-          Column({ space: 6 }) {
-            Text('还可以吃')
-              .fontColor($r('app.color.gray'))
-              .fontWeight(600)
-            Text((this.recommend - this.intake + this.expend).toFixed(0))
-              .fontSize(22)
-              .fontWeight(700)
-          }
-          .justifyContent(FlexAlign.Center)
-
-          Text(`推荐预算${(this.recommend).toFixed(0)}`)
-            .fontSize(12)
-            .fontColor($r('app.color.light_gray'))
-
-        }
-
+        this.statsBuilder({
+          label: '还可以吃',
+          value: (this.recommend - this.intake + this.expend),
+          tips: `推荐预算${(this.recommend).toFixed(0)}`
+        })
       }
 
-      this.statsBuilder('运动消耗', this.expend)
+      this.statsBuilder({ label: '运动消耗', value: this.expend })
 
 
     }
@@ -49,20 +37,24 @@ export default struct CalorieStats {
   }
 
   @Builder
-  statsBuilder(label: string, value: number, tips?: string) {
+  statsBuilder($$: {
+    label: string,
+    value: number,
+    tips?: string
+  }) {
     Column({ space: 6 }) {
       Column({ space: 6 }) {
-        Text(label)
+        Text($$.label)
           .fontColor($r('app.color.gray'))
           .fontWeight(600)
-        Text(value.toFixed(0))
+        Text($$.value.toFixed(0))
           .fontSize(22)
           .fontWeight(700)
       }
       .justifyContent(FlexAlign.Center)
 
-      if (tips) {
-        Text(tips)
+      if ($$.tips) {
+        Text($$.tips)
           .fontSize(12)
           .fontColor($r('app.color.light_gray'))
       }

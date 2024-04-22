@@ -5,12 +5,24 @@ import Want from '@ohos.app.ability.Want';
 import window from '@ohos.window';
 import PreferenceUtil from '../common/utils/PreferenceUtil';
 import DialogModel from '../model/DialogModel';
+import { CommonConstants } from '../common/constants/CommonConstants';
+import DateUtil from '../common/utils/DateUtil';
+import DbUtil from '../common/utils/DbUtil';
+import RecordModel from '../model/RecordModel';
 
 export default class EntryAbility extends UIAbility {
   async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
-    await PreferenceUtil.loadPreference(this.context)
+    PreferenceUtil.loadPreference(this.context)
+
+    AppStorage.SetOrCreate(CommonConstants.RECORD_DATE, DateUtil.beginTimeOfDay(new Date()))
+
+    await DbUtil.initDB(this.context)
+
+    DbUtil.createTable(RecordModel.getCreateTableSql())
+
     DialogModel.initDialogDB(this.context)
+
+    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
   }
 
   onDestroy(): void {

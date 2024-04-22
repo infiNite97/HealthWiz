@@ -37,16 +37,20 @@ const workouts: RecordItem[] = [
   new RecordItem(10004, '乒乓球', $r('app.media.pingpang'), WorkoutCategoryEnum.WHOLE, '小时', 257),
   new RecordItem(10005, '溜冰', $r('app.media.liubing'), WorkoutCategoryEnum.LOWLIMBS, '小时', 587),
   new RecordItem(10006, '瑜伽', $r('app.media.ic_aerobics'), WorkoutCategoryEnum.WHOLE, '小时', 172),
-  new RecordItem(10008, '游泳', $r('app.media.youyong'), WorkoutCategoryEnum.WHOLE, '小时', 682),
-  new RecordItem(10010, '跳舞', $r('app.media.tiaowu'), WorkoutCategoryEnum.WHOLE, '小时', 472),
-  new RecordItem(10011, '足球', $r('app.media.zuqiu'), WorkoutCategoryEnum.LOWLIMBS, '小时', 515),
-  new RecordItem(10012, '射箭', $r("app.media.shejian"), WorkoutCategoryEnum.ARMS, '小时', 403),
-  new RecordItem(10013, '呼啦圈', $r("app.media.hulaquan"), WorkoutCategoryEnum.BODY, '小时', 386),
-  new RecordItem(10016, '哑铃', $r("app.media.juzhong"), WorkoutCategoryEnum.ARMS, '小时', 329),
-  new RecordItem(10017, '仰卧起坐', $r("app.media.yangwoqizuo"), WorkoutCategoryEnum.BODY, '小时', 515),
+  new RecordItem(10007, '游泳', $r('app.media.youyong'), WorkoutCategoryEnum.WHOLE, '小时', 682),
+  new RecordItem(10008, '跳舞', $r('app.media.tiaowu'), WorkoutCategoryEnum.WHOLE, '小时', 472),
+  new RecordItem(10009, '足球', $r('app.media.zuqiu'), WorkoutCategoryEnum.LOWLIMBS, '小时', 515),
+  new RecordItem(10010, '射箭', $r("app.media.shejian"), WorkoutCategoryEnum.ARMS, '小时', 403),
+  new RecordItem(10011, '呼啦圈', $r("app.media.hulaquan"), WorkoutCategoryEnum.BODY, '小时', 386),
+  new RecordItem(10012, '哑铃', $r("app.media.juzhong"), WorkoutCategoryEnum.ARMS, '小时', 329),
+  new RecordItem(10013, '仰卧起坐', $r("app.media.yangwoqizuo"), WorkoutCategoryEnum.BODY, '小时', 515),
 ]
 
 class ItemModel {
+  getById(id: number, isFood: boolean = true) {
+    return isFood ? foods[id] : workouts[id-10000]
+  }
+
   list(isFood: boolean = true): RecordItem[] {
     return isFood ? foods : workouts
   }

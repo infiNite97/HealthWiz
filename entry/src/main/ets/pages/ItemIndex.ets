@@ -4,6 +4,9 @@ import ItemPanelHeader from '../view/item/ItemPanelHeader'
 import ItemCard from '../view/item/ItemCard'
 import NumberKeyboard from '../view/item/NumberKeyboard'
 import RecordItem from '../viewmodel/RecordItem'
+import RecordType from '../viewmodel/RecordType'
+import { RecordTypeEnum, RecordTypes } from '../model/RecordTypeModel'
+import RecordService from '../service/RecordService'
 
 @Entry
 @Component
@@ -11,7 +14,9 @@ struct ItemIndex {
   @State amount: number = 1
   @State value: string = ''
   @State item: RecordItem = null
+  @State type: RecordType = RecordTypes[0]
   @State showPanel: boolean = false
+  @State isFood: boolean = true
 
   onPanelShow(item: RecordItem) {
     this.amount = 1
@@ -20,12 +25,20 @@ struct ItemIndex {
     this.showPanel = true
   }
 
+  onPageShow() {
+    // 获取跳转时的参数
+    let params: any = router.getParams()
+    // 获取点击时的饮食记录类型
+    this.type = params.type
+    this.isFood = this.type.id != RecordTypeEnum.WORKOUT
+  }
+
   build() {
     Column() {
       // 头部
       this.Header()
       // 列表
-      ItemList({ showPanel: this.onPanelShow.bind(this) })
+      ItemList({ showPanel: this.onPanelShow.bind(this), isFood: this.isFood })
         .layoutWeight(1)
       // 底部面板
       Panel(this.showPanel) {
@@ -53,7 +66,14 @@ struct ItemIndex {
             .type(ButtonType.Normal)
             .borderRadius(6)
             .onClick(() => {
-              this.showPanel = false
+              RecordService.insert(this.type.id, this.item.id, this.amount)
+                .then((number) => {
+                  console.log('testTag', '查询到:', number)
+                  this.showPanel = false
+                })
+                .catch((err) => {
+                  console.log('testTag', '查询失败', JSON.stringify(err))
+                })
             })
         }
       }
@@ -75,7 +95,7 @@ struct ItemIndex {
           router.back()
         })
       Blank()
-      Text('早餐').fontSize(18).fontWeight(600)
+      Text(this.type.name).fontSize(18).fontWeight(600)
     }
     .height(32)
     .width('94%')

@@ -1,11 +1,12 @@
 import ItemModel from '../../model/ItemModel'
 import GroupInfo from '../../viewmodel/GroupInfo'
+import ItemCategory from '../../viewmodel/ItemCategory'
 import RecordItem from '../../viewmodel/RecordItem'
 
 @Component
 export default struct ItemList {
   showPanel: (item: RecordItem) => void
-  @State isFood: boolean = false
+  @Prop isFood: boolean
 
   build() {
     Tabs() {
@@ -14,7 +15,7 @@ export default struct ItemList {
       }
       .tabBar('全部')
 
-      ForEach(ItemModel.listItemGroupByCategory(this.isFood), (group: GroupInfo) => {
+      ForEach(ItemModel.listItemGroupByCategory(this.isFood), (group: GroupInfo<ItemCategory, RecordItem>) => {
         TabContent() {
           this.TabContentBuilder(group.items)
         }

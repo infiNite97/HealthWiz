@@ -10,7 +10,7 @@ class DialogModel {
   initDialogDB(context) {
 
     const config = {
-      name: 'FlashEats.db',
+      name: 'AIDialog.db',
       securityLevel: relationalStore.SecurityLevel.S1
     }
 

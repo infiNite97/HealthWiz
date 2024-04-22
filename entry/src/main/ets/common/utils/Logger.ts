@@ -1,6 +1,6 @@
 import hilog from '@ohos.hilog';
 
-const LOGGER_PREFIX: string = 'Heima_Healthy';
+const LOGGER_PREFIX: string = 'HealthWiz';
 
 class Logger {
   private domain: number;

@@ -1,3 +1,6 @@
+import DateUtil from '../../common/utils/DateUtil'
+import RecordService from '../../service/RecordService'
+import RecordVO from '../../viewmodel/RecordVO'
 import RecordList from './RecordList'
 import SearchHeader from './SearchHeader'
 import StatsCard from './StatsCard'
@@ -7,8 +10,28 @@ export default struct RecordIndex {
   @State Height: string = '170'
   @State Weight: string = '60'
   @State showPanel: boolean = false
-  @State recommend: number = 1862
-  @State rcm: number = 1862
+  @State recommend: number = 2651
+  @State recommendcarbon: number = 178
+  @State recommendprotein: number = 60
+  @State recommendfat: number = 66
+  @State rcm: number = 2651
+  @State rcb: number = 178
+  @State rpr: number = 60
+  @State rft: number = 66
+  @Watch('aboutToAppear')
+  @StorageProp('selectedDate') selectedDate: number = DateUtil.beginTimeOfDay(new Date())
+  @Provide records: RecordVO[] = []
+  @Prop @Watch('handlePageShow') isPageShow: boolean
+
+  handlePageShow() {
+    if (this.isPageShow) {
+      this.aboutToAppear()
+    }
+  }
+
+  async aboutToAppear() {
+    this.records = await RecordService.queryRecordByDate(this.selectedDate)
+  }
 
   build() {
     Column() {
@@ -18,13 +41,21 @@ export default struct RecordIndex {
       SearchHeader()
 
       Row() {
-        StatsCard({ recommend: this.recommend })
+        // 热量方案角标
+        StatsCard({
+          recommend: this.recommend,
+          recommendcarbon: this.recommendcarbon,
+          recommendprotein: this.recommendprotein,
+          recommendfat: this.recommendfat
+        })
+        // 统计卡片
         this.DietPlanSign()
       }
 
+      // 记录列表
       RecordList()
         .layoutWeight(1)
-
+      // 热量方案Panel
       this.DietPlanPanel()
 
     }
@@ -56,15 +87,17 @@ export default struct RecordIndex {
     Row() {
       Text('热量方案')
         .fontColor('#7f5319')
-        .fontSize(16)
+        .fontSize(14)
         .fontWeight(500)
+        .width(60)
       Image($r('app.media.ic_public_arrow_right'))
         .width(20)
         .fillColor('#ffcaa97e')
     }
+    .height(26)
     .position({ x: 0, y: 40 })
     .backgroundColor('#fee5a6')
-    .padding(8)
+    .padding({ left: 6 })
     .borderRadius({ bottomRight: 18, topLeft: 18 })
     .justifyContent(FlexAlign.Center)
     .onClick(() => {
@@ -92,7 +125,11 @@ export default struct RecordIndex {
               .optionFont({ size: 18 })
               .onSelect((idx, val) => {
                 this.Height = val
-                this.rcm = 660 + (11.5 * parseInt(this.Weight)) + (3.4 * parseInt(this.Height))
+                let BRM = 660 + (11.5 * parseInt(this.Weight)) + (3.4 * parseInt(this.Height))
+                this.rcm = BRM * 1.375
+                this.rcb = ((this.rft * 9) - (this.rpr * 4)) / 2
+                this.rpr = parseInt(this.Weight)
+                this.rft = (this.rcm * 0.75) * 0.3 / 9
               })
 
           }
@@ -116,7 +153,11 @@ export default struct RecordIndex {
               .optionFont({ size: 18 })
               .onSelect((idx, val) => {
                 this.Weight = val
-                this.rcm = 660 + (11.5 * parseInt(this.Weight)) + (3.4 * parseInt(this.Height))
+                let BRM = 660 + (11.5 * parseInt(this.Weight)) + (3.4 * parseInt(this.Height))
+                this.rcm = BRM * 1.375
+                this.rcb = ((this.rft * 9) - (this.rpr * 4)) / 2
+                this.rpr = parseInt(this.Weight)
+                this.rft = (this.rcm * 0.75) * 0.3 / 9
               })
 
           }
@@ -168,6 +209,9 @@ export default struct RecordIndex {
             .onClick(() => {
               this.showPanel = false
               this.recommend = this.rcm
+              this.recommendcarbon = this.rcb
+              this.recommendprotein = this.rpr
+              this.recommendfat = this.rft
             })
         }
         .width('100%')
