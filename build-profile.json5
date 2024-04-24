@@ -21,13 +21,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "storePassword": "0000001B9A15ABABFF6034207DB881DFE7E22A4DEA6A3E2E2B8192AF8BF4B316DCE874974ADC2A2235F835",
-          "certpath": "C:/Users/Kevin/DevEcoStudioProjects/HealthWiz/HealthWiz.cer",
-          "keyAlias": "HealthWizdemo",
-          "keyPassword": "0000001B43EE9BBDC9E2B4A0CEAF91018B3A2C010E12AE93B9D3BDDA7771AA6220924D48D25ECFE9033CB4",
-          "profile": "C:/Users/Kevin/DevEcoStudioProjects/HealthWiz/HealthWizDebug.p7b",
+          "certpath": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_HealthWiz_com.example.HealthWiz_30086000744490014.cer",
+          "storePassword": "0000001A99C69A38BB38EBA20E08B5B526402E7B27FA67279AC1A426CD858260C9CD1F8A8624ABAB993E",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A84487D4699555F50DCB63BF3ECA0075EC3829B6A3EEB5591A266130DE5D04EA96F855B263CD4",
+          "profile": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_HealthWiz_com.example.HealthWiz_30086000744490014.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:/Users/Kevin/DevEcoStudioProjects/HealthWiz/HealthWiz.p12"
+          "storeFile": "C:\\Users\\Kevin\\.ohos\\config\\auto_debug_HealthWiz_com.example.HealthWiz_30086000744490014.p12"
         }
       }
     ]

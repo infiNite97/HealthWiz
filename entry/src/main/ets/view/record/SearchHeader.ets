@@ -1,3 +1,6 @@
+import router from '@ohos.router'
+
+@Preview
 @Component
 export default struct SearchHeader {
   build() {
@@ -5,15 +8,15 @@ export default struct SearchHeader {
       Search({ placeholder: '搜索饮食或运动信息' })
         .textFont({ size: 18 })
         .layoutWeight(1)
-      Badge({
-        count: 1,
-        position: BadgePosition.RightTop,
-        style: { fontSize: 10 }
-      }) {
-        Image($r('app.media.ic_public_email'))
-          .width(24)
-      }
+        .copyOption(CopyOptions.LocalDevice)
+        .searchButton('搜索')
+        .onSubmit((val) => {
+          router.pushUrl({
+            url: 'pages/SearchPage',
+            params: { val: val }
+          })
+        })
     }
-    .width('95%')
+    .width('90%')
   }
 }

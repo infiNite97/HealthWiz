@@ -3,6 +3,8 @@ import GroupInfo from '../../viewmodel/GroupInfo'
 import RecordType from '../../viewmodel/RecordType'
 import RecordVO from '../../viewmodel/RecordVO'
 import router from '@ohos.router'
+import RecordModel from '../../model/RecordModel'
+import DateUtil from '../../common/utils/DateUtil'
 
 @Extend(Text)
 function grayText() {
@@ -14,9 +16,15 @@ function grayText() {
 export default struct RecordList {
   @Consume @Watch('handleRecordsChange') records: RecordVO[]
   @State groups: GroupInfo<RecordType, RecordVO>[] = []
+  @StorageProp('selectedDate') @Watch('update') selectedDate: number = DateUtil.beginTimeOfDay(new Date())
 
   handleRecordsChange() {
     this.groups = RecordService.calculateGroupInfo(this.records)
+  }
+
+  async update() {
+    this.records = await RecordService.queryRecordByDate(this.selectedDate)
+    this.handleRecordsChange()
   }
 
   build() {
@@ -61,7 +69,8 @@ export default struct RecordList {
                   }
                   .width('100%')
                   .padding(6)
-                }.swipeAction({ end: this.deleteButton.bind(this) })
+                }
+                .swipeAction({ end: this.deleteButton(item.id) })
               })
             }
             .width('100%')
@@ -81,12 +90,16 @@ export default struct RecordList {
   }
 
   @Builder
-  deleteButton() {
+  deleteButton(id: number) {
     Row() {
       Image($r('app.media.ic_public_delete_filled'))
         .width(20)
         .fillColor(Color.Red)
         .margin(5)
     }
+    .onClick(() => {
+      RecordModel.deleteById(id)
+      this.update()
+    })
   }
 }

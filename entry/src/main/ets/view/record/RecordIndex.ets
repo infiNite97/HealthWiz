@@ -68,7 +68,7 @@ export default struct RecordIndex {
     .height('100%')
     .backgroundColor($r('app.color.index_page_background'))
   }
-
+  // 生成身高
   heigh() {
     let shengaos = []
     for (let index = 100; index <= 230; index++) {
@@ -78,6 +78,7 @@ export default struct RecordIndex {
     return shengaos
   }
 
+  // 生成体重
   weigh() {
     let tizhongs = []
     for (let index = 25; index <= 150; index++) {
@@ -87,6 +88,7 @@ export default struct RecordIndex {
     return tizhongs
   }
 
+  // 热量计划标签
   @Builder
   DietPlanSign() {
     Row() {
@@ -110,6 +112,7 @@ export default struct RecordIndex {
     })
   }
 
+  // 热量计划Panel
   @Builder
   DietPlanPanel() {
     Panel(this.showPanel) {
