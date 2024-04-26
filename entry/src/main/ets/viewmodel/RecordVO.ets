@@ -24,4 +24,8 @@ export default class RecordVO {
    * 食物数量或运动时长，如果是运动信息则无
    */
   amount: number = 0
+  /**
+   * 记录的日期
+   */
+  createTime: number
 }

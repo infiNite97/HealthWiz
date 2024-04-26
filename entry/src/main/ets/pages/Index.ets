@@ -1,6 +1,7 @@
 import BreakpointConstants from '../common/constants/BreakpointConstants'
 import BreakpointSystem from '../common/utils/BreakpointSystem'
 import WenxinAI from '../view/ai/WenxinAI'
+import Mine from '../view/mine/Mine'
 import RecordIndex from '../view/record/RecordIndex'
 
 @Entry
@@ -62,7 +63,7 @@ struct Index {
       .tabBar(this.TabBarBuilder($r('app.string.tab_assistant'), $r('app.media.ai'), 1))
 
       TabContent() {
-        Text('我的页面')
+        Mine()
       }
       .tabBar(this.TabBarBuilder($r('app.string.tab_user'), $r('app.media.mine'), 2))
 

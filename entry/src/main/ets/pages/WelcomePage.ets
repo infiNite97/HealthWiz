@@ -62,7 +62,7 @@ struct WelcomePage {
       Row() {
 
         Image($r('app.media.home_logo'))
-          .width(280)
+          .width(300)
       }
       .layoutWeight(1)
 

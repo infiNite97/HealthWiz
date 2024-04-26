@@ -25,7 +25,7 @@ class RecordService {
     let rps = await RecordModel.listByDate(date)
     // 将RecordPO转为RecordVO
     return rps.map(rp => {
-      let rv = { id: rp.id, typeId: rp.typeId, amount: rp.amount } as RecordVO
+      let rv = { id: rp.id, typeId: rp.typeId, amount: rp.amount, createTime: rp.createTime } as RecordVO
 
       rv.recordItem = ItemModel.getById(rp.itemId, rp.typeId !== RecordTypeEnum.WORKOUT)
 
@@ -33,6 +33,43 @@ class RecordService {
 
       return rv
     })
+  }
+
+  async queryRecordByName(name: ResourceStr, date: number, tracetime: number = 1095): Promise<RecordVO[][]> {
+    // 查询数据库RecordPO
+    let recordsByDates: RecordPO[][] = [];
+
+    // 假设您想要查询过去8天的记录
+    for (let i = date; i > date - tracetime * 86400000; i -= 86400000) {
+      let records = await RecordModel.listByDate(i);
+      recordsByDates.push(records);
+    }
+
+    // 将RecordPO转为RecordVO
+    let recordVOs: RecordVO[] = [];
+    let recordVOss: RecordVO[][] = [];
+
+    for (let records of recordsByDates) {
+      for (let record of records) {
+        let rv = {
+          id: record.id,
+          typeId: record.typeId,
+          amount: record.amount,
+          createTime: record.createTime
+        } as RecordVO;
+
+        rv.recordItem = ItemModel.getById(record.itemId, record.typeId !== RecordTypeEnum.WORKOUT);
+        rv.calorie = record.amount * rv.recordItem.calorie;
+
+        recordVOs.push(rv);
+      }
+    }
+
+    // 根据食物名称筛选RecordVO
+    let filteredRecordVOs = recordVOs.filter(vo => vo.recordItem.name === name);
+    recordVOss.push(filteredRecordVOs);
+
+    return recordVOss;
   }
 
   calculateStatsInfo(records: RecordVO[]): StatsInfo {

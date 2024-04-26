@@ -1,16 +1,17 @@
 import http from '@ohos.net.http'
 import { WindowMode } from '@ohos.UiTest'
+import PreferenceUtil from '../../common/utils/PreferenceUtil'
 import DialogModel from '../../model/DialogModel'
 
 // 文心一言返回体
 class WenXinReturn {
-  id: string = ""
-  object: string = ""
-  created: string = ""
-  result: string = ""
+  id: string = ''
+  object: string = ''
+  created: string = ''
+  result: string = ''
   is_truncated: Boolean = false
   need_clear_history: Boolean = false
-  finish_reason: string = ""
+  finish_reason: string = ''
   usage: Usage = new Usage()
 }
 
@@ -21,13 +22,13 @@ class Usage {
 }
 
 class MsgOutput {
-  content: string = ""
+  content: string = ''
 }
 
 export class MsgInput {
   id: number = 0
-  role: string = ""
-  content: string = ""
+  role: string = ''
+  content: string = ''
 }
 
 @Component
@@ -43,7 +44,7 @@ export default struct WenxinAI {
   @State loadDialog: boolean = false
   scroller: Scroller = new Scroller()
 
-  aboutToAppear() {
+  async aboutToAppear() {
 
     // 每次启动查询之前的对话记录
     DialogModel.getDialogDB()
@@ -56,12 +57,23 @@ export default struct WenxinAI {
         console.log('testTag', '查询失败:', JSON.stringify(err))
       })
 
-    // 如果是第一次对话则对话框显示预留语句
-    setTimeout(() => {
-      if (this.MsgArray.length == 0) {
-        this.message = "你好！健康小助手"
-      }
-    }, 100)
+    // 如果是第一次对话则对话框发送预留语句
+
+    // 读取用户首选项
+    let isSended = await PreferenceUtil.getPreferenceValue('AIinit', false)
+    // 记录为已发送则不再发送，未发送则发送预留语句
+    if (!isSended) {
+      this.message = '你好！健康小助手'
+      let MsgIn: MsgInput = new MsgInput()
+      MsgIn.id = this.MsgArray.length
+      MsgIn.role = 'user'
+      MsgIn.content = this.message.replace(/[*]/g, ' ')
+      this.MsgArray.push(MsgIn)
+      this.httpData(this.MsgArray)
+      this.message = ''
+      PreferenceUtil.putPreferenceValue('AIinit', true)
+    }
+
 
     //对话条数超过300条时删掉先前的对话
     if (this.MsgArray.length > 300) {
@@ -98,17 +110,17 @@ export default struct WenxinAI {
 
     try {
       const responseData = await this.sendHttpRequest(
-        "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=24.eef66166f034ece760572f139967312d.2592000.1715270467.282335-60592984",
+        'https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions?access_token=24.eef66166f034ece760572f139967312d.2592000.1715270467.282335-60592984',
         http.RequestMethod.POST,
         [{ 'Content-Type': 'application/json' }],
-        { "messages": MsgArray }
+        { 'messages': MsgArray }
       )
 
       // 处理Http应答
       let MsgReturn: WenXinReturn = JSON.parse(responseData.result.toString())
       this.MsgResult.content = MsgReturn.result
       let MsgIn: MsgInput = new MsgInput()
-      MsgIn.role = "assistant"
+      MsgIn.role = 'assistant'
       MsgIn.content = this.MsgResult.content
       MsgIn.id = this.MsgArray.length
       this.MsgArray.push(MsgIn)
@@ -153,19 +165,21 @@ export default struct WenxinAI {
         Row() {
           Image($r('app.media.healthyhelper'))
             .width(24)
-            .fillColor("#EDEDED")
+            .fillColor('#EDEDED')
             .margin({ right: 8 })
           Text('健康小助手')
+            .fontSize(20)
+            .fontWeight(700)
         }
+        .padding(10)
         .width('100%')
         .justifyContent(FlexAlign.Center)
-        .height(60)
 
         // 健康小助手对话框
         Scroll(this.scroller) {
           Column() {
             ForEach(this.MsgArray, (item: MsgInput, index: number) => {
-              if (item.role == "user") {
+              if (item.role == 'user') {
                 Row() {
                   Text(item.content)
                     .padding(15.5)
@@ -174,11 +188,11 @@ export default struct WenxinAI {
                     .textAlign(TextAlign.End)
                 }
                 .margin({ top: index === 0 ? 0 : 12 })
-                .width("100%")
+                .width('100%')
                 .alignItems(VerticalAlign.Top)
                 .justifyContent(FlexAlign.End)
                 .padding({ left: 10, right: 10 })
-              } else if (item.role == "assistant") {
+              } else if (item.role == 'assistant') {
                 Row() {
                   Text(item.content)
                     .padding(15.5)
@@ -187,7 +201,7 @@ export default struct WenxinAI {
 
                 }
                 .margin({ top: index === 0 ? 0 : 12 })
-                .width("100%")
+                .width('100%')
                 .alignItems(VerticalAlign.Top)
                 .justifyContent(FlexAlign.Start)
                 .padding({ left: 10, right: 10 })
@@ -196,7 +210,7 @@ export default struct WenxinAI {
           }
           .padding({ top: 12, bottom: 12 })
         }
-        .width("100%")
+        .width('100%')
         .margin({ bottom: 70 })
 
       }
@@ -225,16 +239,16 @@ export default struct WenxinAI {
               if (!this.isLoading) {
                 let MsgIn: MsgInput = new MsgInput()
                 MsgIn.id = this.MsgArray.length
-                MsgIn.role = "user"
+                MsgIn.role = 'user'
                 MsgIn.content = this.message.replace(/[*]/g, ' ')
                 this.MsgArray.push(MsgIn)
                 this.httpData(this.MsgArray)
-                this.message = ""
+                this.message = ''
               }
             })
         }
         .borderRadius({ topLeft: 10, topRight: 10 })
-        .backgroundColor("#F7F7F7")
+        .backgroundColor('#F7F7F7')
         .width('100%')
 
         if (this.isLoading) {
@@ -244,9 +258,9 @@ export default struct WenxinAI {
         }
       }
     }
-    .width("100%")
-    .height("100%")
+    .width('100%')
+    .height('100%')
     .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor("#EDEDED")
+    .backgroundColor('#EDEDED')
   }
 }
